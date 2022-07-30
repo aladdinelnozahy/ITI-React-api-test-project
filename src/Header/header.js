@@ -22,6 +22,7 @@ class Header extends Component {
                                     <Link to="/about-us" className='mx-2'>About-Us</Link>
                                     <Link to="/contact" className='mx-2' >Contact-Us</Link>
                                     <Link to="/movies"  className='mx-2'>movies</Link>
+                                    <Link to="/fav"  className='mx-2'>Favourite</Link>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>

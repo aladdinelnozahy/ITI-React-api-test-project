@@ -20,30 +20,14 @@ const Movies = () => {
             })
             .catch((err) => {
                 console.log(err);
-                alert(err);
             });
 
     }, [])
-    // axios.post("url","data".{})
 
 
     return (
         <>
-            {/* <ul>
-          {movies.map((movie)=>{
-            return (
-            <Link to={`/details/${movie.id}`} key={movie.id}>
-                <li >{movie.title}</li>                
-            </Link>
-            );
-        })}
-
-       </ul>  */}
-
-
-
-
-
+            {/* 
             <div className="row g-5 mt-3 container-fluid mx-auto bg-light m-2 p-3">
                 {movies.map((movie) => {
                     console.log(movie)
@@ -59,8 +43,39 @@ const Movies = () => {
 
 
                 })}
-            </div>
+            </div> */}
 
+            <div className='container my-5'>
+                <div className='album py-5 bg-light'>
+                    <div className='container'>
+                        <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
+                            {movies.map((movie) => {
+                                return (
+                                    <div className='col h-25 text'>
+
+                                        <div className='card shadow-sm'>
+                                            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className="item" style={{ maxWidth: "400px" }} />
+
+                                            <div className='card-body text-center'>
+                                            <h4>{movie.original_title}</h4>
+                                                <div className='d-flex justify-content-center align-items-center'>
+                                                    
+                                                    <div className='btn-group'>
+                                                        <Link to={`/details/${movie.id}`} key={movie.id}>
+                                                        <button type="button" className='btn btn-sm btn-success m-1'>details</button>
+                                                        </Link>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }
