@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import axiosInstance from '../axiosConfig/instance';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { favouriteMovies } from '../store/actions/newFavDel';
+import {BsFillHeartFill} from "react-icons/bs";
 const Movies = () => {
 
     const [movies, setMovies] = useState([]);
+    var [pageStart,setPageStart]= useState(1);
 
     useEffect(() => {
         axiosInstance
             // axios
-            .get('movie/popular')
-            // .get('movie/popular')
-
+            .get('movie/popular',{params:{page:pageStart}})
             .then((res) => {
                 // console.log(res.data);
                 setMovies(res.data.results)
@@ -22,9 +23,39 @@ const Movies = () => {
                 console.log(err);
             });
 
-    }, [])
+    }, [pageStart]);
+    function prev(){
+        if(pageStart>1){
+            setPageStart(--pageStart)
+        }
+    }
+    function next(){
+        setPageStart(++pageStart)
+    }
+// ------------------------------
 
+    // const favs =useSelector(state=>state)
+    // const dispatch =useDispatch();
 
+    // const removeFromFav= (removeId)=>{
+    //     let removeMovie= favs.favMovies.find((fav)=>{
+    //         return fav.id === removeId
+    //     })
+    //     favs.favMovies.splice(favs.favMovies.indexOf(removeMovie),1)
+    //     favs.counter= favs.counter-1
+    // }
+    // const addToFav=(mov)=>{
+    //     let FindMovie= favs.favMovies.find((fav)=>{
+    //         return fav.id === mov.id;
+    //     });
+    //     if(!FindMovie){
+    //         dispatch(favouriteMovies(mov))
+    //     }
+    //     if (FindMovie){
+    //         removeFromFav
+    //     }
+    // }
+    
     return (
         <>
             {/* 
@@ -47,6 +78,10 @@ const Movies = () => {
 
             <div className='container my-5'>
                 <div className='album py-5 bg-light'>
+                <button className="btn btn-group bg-warning text-dark  " onClick={()=>prev()} >Previous</button>
+                 
+                <button className="btn btn-group bg-success text-light" onClick={()=>next()} >Next</button>
+                <p>Page Number: {pageStart}</p>
                     <div className='container'>
                         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
                             {movies.map((movie) => {
@@ -64,7 +99,7 @@ const Movies = () => {
                                                         <Link to={`/details/${movie.id}`} key={movie.id}>
                                                         <button type="button" className='btn btn-sm btn-success m-1'>details</button>
                                                         </Link>
-
+                                                        {/* <BsFillHeartFill color={favs.favMovies.find((fav)=> fav.id ===movie.id)?"red":"black"} onClick={()=> addToFav(movie)}/> */}
                                                     </div>
                                                 </div>
                                             </div>

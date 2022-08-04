@@ -23,6 +23,8 @@ class Header extends Component {
                                     <Link to="/contact" className='mx-2' >Contact-Us</Link>
                                     <Link to="/movies"  className='mx-2'>movies</Link>
                                     <Link to="/fav"  className='mx-2'>Favourite</Link>
+                                    <Link to="/login"  className='mx-2'>login</Link>
+                                    <Link to="/signUp"  className='mx-2'>signUp</Link>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
